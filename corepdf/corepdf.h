@@ -15,7 +15,6 @@ public:
 
 private:
     QPdfWidget *PdfWidget;
-
 };
 
 #endif // COREPDF_H

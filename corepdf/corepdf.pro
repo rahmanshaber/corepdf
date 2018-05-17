@@ -8,7 +8,6 @@ INCLUDEPATH += ../qpdflib
 LIBS += -L$$OUT_PWD/../qpdflib
 LIBS += -lqpdf
 
-
 HEADERS += corepdf.h\
     corepdf.h
 

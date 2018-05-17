@@ -20,24 +20,18 @@ void corepdf::openPdfFile(const QString path)
     QVBoxLayout * mainLayout = new QVBoxLayout();
     PdfWidget = new QPdfWidget();
 
-//    PdfWidget = new QPdfWidget();
-    connect(PdfWidget, &QPdfWidget::initialized, [this]() {
+    connect(PdfWidget, &QPdfWidget::initialized, [this,path]() {
         PdfWidget->setToolbarVisible(false);
+        QFile f(path);
+        if (f.open(QIODevice::ReadOnly)) {
+            QByteArray data = f.readAll();
+            PdfWidget->loadData(data);
+            f.close();
+        }
     });
 
-    PdfWidget->setToolbarVisible(false);
     mainLayout->setContentsMargins(0,0,0,0);
     mainLayout->addWidget(PdfWidget);
     setLayout(mainLayout);
-    QFile f(path);
-    if (f.open(QIODevice::ReadOnly)) {
-        QByteArray data = f.readAll();
-        PdfWidget->loadData(data);
-        f.close();
-    }
-//    QPdfWidget *pPdf = new QPdfWidget();
-//    connect(pPdf, &QPdfWidget::initialized, [=]() {
-//        pPdf->setToolbarVisible(false);
-//    });
 
 }
